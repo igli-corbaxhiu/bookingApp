@@ -26,11 +26,10 @@ Route::get('/dashboard', function () {
     $cars = Car::all();
     $userId = Auth::user()->id;
     $carBookings = CarBooking::all()->where('booked_user_id', '=', $userId);
-//    dd($carBookings);
     return view('dashboard', compact('cars', 'carBookings'));
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('cars', CarsController::class);
-Route::resource('bookings', CarBookController::class);
+Route::resource('cars', CarsController::class)->middleware('role:admin');
+Route::resource('bookings', CarBookController::class)->middleware('role:user');
 
 require __DIR__.'/auth.php';

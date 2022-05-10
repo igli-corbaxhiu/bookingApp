@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany(CarBooking::class, 'booked_user_id');
     }
 
+    public function cars() {
+
+        return $this->belongsToMany(Car::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

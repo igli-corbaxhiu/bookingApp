@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarBooking;
-use App\Models\User;
 use Carbon\Carbon;
-use Carbon\Traits\Date;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,6 +60,8 @@ class CarBookController extends Controller
         $carbooking = new CarBooking();
         $carbooking->fill($request->all());
         $carbooking->booked_user_id = Auth::user()->id;
+        $carbooking->car->status = 0;
+
         $carbooking->save();
 
         return redirect()->route('dashboard');
@@ -106,9 +105,9 @@ class CarBookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(CarBooking $carBooking)
     {
         //
     }

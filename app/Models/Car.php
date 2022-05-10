@@ -13,4 +13,9 @@ class Car extends Model
 
     protected $fillable = ['brand', 'model', 'engine', 'status', 'color', 'price'];
 
+    public function users() {
+
+        return $this->belongsToMany(User::class);
+    }
+
 }
