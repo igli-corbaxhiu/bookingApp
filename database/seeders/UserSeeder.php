@@ -43,5 +43,16 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             ]);
         $thirdUser->assignRole('admin');
+
+        $fourthUser = User::create(
+            [
+                'name' => 'Test2',
+                'surname' => 'Test2',
+                'email' => 'test2@gmail.com',
+                'birthDate' => '2001-01-01',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            ]);
+
+        $fourthUser->assignRole('user');
     }
 }

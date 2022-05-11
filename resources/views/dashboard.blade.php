@@ -103,7 +103,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($carBookings as $booking)
+                                @foreach ($bookings as $booking)
                                     <tr>
                                         <td class="border border-slate-300">{{$booking->id}}</td>
                                         <td class="border border-slate-300">{{$booking->car_id}}</td>
@@ -114,7 +114,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     @endrole
             </div>

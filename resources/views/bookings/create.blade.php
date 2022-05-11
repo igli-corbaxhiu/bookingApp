@@ -11,7 +11,7 @@
                     px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 <option value="">Select a car</option>
                 @foreach($cars as $car)
-                    <option value="@if(isset($car) && ($car->status == true)){{$car->id}}@endif">{{ $car->brand }}</option>
+                    <option value="@if(isset($car) && ($car->status = 1)){{$car->id}}@endif">{{ $car->brand }}</option>
                 @endforeach
             </select>
         </div>

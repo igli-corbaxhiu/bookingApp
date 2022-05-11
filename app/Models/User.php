@@ -28,14 +28,9 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function booked_cars()
-    {
-        return $this->hasMany(CarBooking::class, 'booked_user_id');
-    }
+    public function bookings() {
 
-    public function cars() {
-
-        return $this->belongsToMany(Car::class);
+        return $this->hasMany(Booking::class);
     }
 
     /**

@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('car_bookings', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('booked_user_id');
-            $table->unsignedInteger('car_id');
             $table->dateTime('start_time');
             $table->dateTime('return_time');
+            $table->foreignId('car_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_bookings');
+        Schema::dropIfExists('bookings');
     }
 };

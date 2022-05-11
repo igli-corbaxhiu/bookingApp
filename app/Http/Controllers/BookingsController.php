@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Car;
-use App\Models\CarBooking;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CarBookController extends Controller
+class BookingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -44,25 +45,26 @@ class CarBookController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $request->validate([
-           'start_time' => [
-               'after:today'
-           ],
+            'start_time' => [
+                'after:today'
+            ],
             'return_time' => [
                 'after_or_equal:start_time'
-            ]
+            ],
         ]);
 
-        $carbooking = new CarBooking();
+        $userId = Auth::user()->id;
+        $carbooking = new Booking();
         $carbooking->fill($request->all());
-        $carbooking->booked_user_id = Auth::user()->id;
-        $carbooking->car->status = 0;
-
+        $carbooking->user_id = $userId;
         $carbooking->save();
+
+//        $carbooking->users()->attach(Auth::user()->id);
 
         return redirect()->route('dashboard');
     }
@@ -105,9 +107,9 @@ class CarBookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(CarBooking $carBooking)
+    public function destroy($id)
     {
         //
     }

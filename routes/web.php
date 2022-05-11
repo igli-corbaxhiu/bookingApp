@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\CarBookController;
+use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CarsController;
+use App\Models\Booking;
 use App\Models\Car;
-use App\Models\CarBooking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,11 +25,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $cars = Car::all();
     $userId = Auth::user()->id;
-    $carBookings = CarBooking::all()->where('booked_user_id', '=', $userId);
-    return view('dashboard', compact('cars', 'carBookings'));
+    $bookings = Booking::all()->where('user_id', '=', $userId);
+    return view('dashboard', compact('cars', 'bookings'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('cars', CarsController::class)->middleware('role:admin');
-Route::resource('bookings', CarBookController::class)->middleware('role:user');
+Route::resource('bookings', BookingsController::class)->middleware('role:user');
 
 require __DIR__.'/auth.php';
