@@ -8,13 +8,14 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BookingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -32,6 +33,7 @@ class BookingsController extends Controller
         $birth = Auth::user()->birthDate;
         $currentDate = Carbon::now();
         $before18Years = $currentDate->diff($birth);
+
         if($before18Years->y >= 18){
             return view('bookings.create', compact('cars'));
         }
@@ -61,21 +63,32 @@ class BookingsController extends Controller
         $userId = Auth::user()->id;
         $carbooking = new Booking();
         $carbooking->fill($request->all());
+        $booking = Booking::where('car_id', $carbooking->car_id)->first();
         $carbooking->user_id = $userId;
-        $carbooking->save();
+        $car = Car::find($carbooking->car_id);
 
-//        $carbooking->users()->attach(Auth::user()->id);
+        if ($booking != null) {
 
-        return redirect()->route('dashboard');
+            return redirect()->route('bookings.create')->with('reason', 'Car not available!');
+        }
+        else {
+
+            $car->status = false;
+            $car->save();
+            $carbooking->save();
+
+            return redirect()->route('dashboard');
+        }
     }
+
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show()
     {
         //
     }

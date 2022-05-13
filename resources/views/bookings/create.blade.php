@@ -2,6 +2,7 @@
 @section('content')
     <form method="POST" action="{{ route('bookings.store') }}">
         @csrf
+
         <div class="w-full max-w-xs sm:px-6 lg:px-8 justify-center">
         <h1 class="underline text-lg mb-4">Book a Car</h1>
         <div>
@@ -44,5 +45,12 @@
         <div>
             <button class="border-2 bg-slate-300 py-2 px-4 rounded mt-2" type="submit">Submit</button>
         </div>
-    </div>
+        </div>
+    </form>
+
+    @if(session()->has('reason'))
+        <div class="mt-4"> {{ session()->get('reason') }}</div>
+    @endif
+
+
 @endsection

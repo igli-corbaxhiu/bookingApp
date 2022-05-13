@@ -87,10 +87,10 @@
                                 </div>
                             </div>
                         </div>
-                        @if(!empty($notAllowed))
-                            <div> {{ $notAllowed }}</div>
-                        @endif
 
+                        @if(!empty($notAllowed))
+                            <div class="flex justify-center mt-4"> {{ $notAllowed }}</div>
+                        @else
                         <h1 class="flex justify-center underline mt-8">Booked Cars</h1>
                         <div class="flex justify-center mt-2">
                             <table class="border-collapse border-2 border-slate-300 text-xl mt-2 mb-4">
@@ -114,6 +114,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        @endif
                     </div>
                     @endrole
             </div>

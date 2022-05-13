@@ -23,9 +23,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+
     $cars = Car::all();
     $userId = Auth::user()->id;
     $bookings = Booking::all()->where('user_id', '=', $userId);
+
     return view('dashboard', compact('cars', 'bookings'));
 })->middleware(['auth'])->name('dashboard');
 
