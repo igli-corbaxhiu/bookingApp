@@ -87,6 +87,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mx-auto justify-center flex lg:px-8 mt-4">
+                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-48">
+                                <div class="flex justify-center text-center p-4 bg-blue-200 border-b border-gray-200">
+                                    <a href="{{route('cars.sort')}}">Sort cars from the most booked one!</a>
+                                </div>
+                            </div>
+                        </div>
 
                         @if(!empty($notAllowed))
                             <div class="flex justify-center mt-4"> {{ $notAllowed }}</div>

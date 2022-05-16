@@ -22,7 +22,8 @@ class CarFactory extends Factory
             'engine' => $this->faker->text(10),
             'color' => $this->faker->text(10),
             'price' => rand(20, 1000),
-            'status' => rand(true, false),
+            'status' => true,
+            'timeBooked' => rand(0,5)
         ];
     }
 }

@@ -19,8 +19,9 @@ class CreateCarsTable extends Migration
             $table->string('model');
             $table->string('engine');
             $table->string('color');
-            $table->boolean('status')->default(1);
+            $table->boolean('status');
             $table->float('price');
+            $table->integer('timeBooked');
             $table->timestamps();
         });
     }

@@ -33,5 +33,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('cars', CarsController::class)->middleware('role:admin');
 Route::resource('bookings', BookingsController::class)->middleware('role:user');
+Route::any('sort', [CarsController::class, 'sort'])->name('cars.sort');
 
 require __DIR__.'/auth.php';

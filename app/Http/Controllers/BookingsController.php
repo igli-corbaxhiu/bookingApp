@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Car;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class BookingsController extends Controller
 {
@@ -69,11 +67,14 @@ class BookingsController extends Controller
 
         if ($booking != null) {
 
+            $car->status = true;
+            $car->save();
             return redirect()->route('bookings.create')->with('reason', 'Car not available!');
         }
         else {
 
             $car->status = false;
+            $car->timeBooked++;
             $car->save();
             $carbooking->save();
 
@@ -120,10 +121,10 @@ class BookingsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($booking)
     {
-        //
+       //
     }
 }
