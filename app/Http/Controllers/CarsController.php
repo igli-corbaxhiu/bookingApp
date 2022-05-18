@@ -20,12 +20,20 @@ class CarsController extends Controller
         //
     }
 
-    public function sort() {
+    public function sortDesc() {
 
         $cars = Car::all();
         $sorted = $cars->sortByDesc('timeBooked');
         return view('cars', compact('sorted'));
     }
+
+    public function sort() {
+
+        $cars = Car::all();
+        $sorted = $cars->sortBy('timeBooked');
+        return view('cars', compact('sorted'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

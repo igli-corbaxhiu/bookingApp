@@ -123,7 +123,7 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($booking)
+    public function destroy($id)
     {
        //
     }

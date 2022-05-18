@@ -87,10 +87,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mx-auto justify-center flex lg:px-8 mt-4">
+                        <div class="mx-auto justify-center flex lg:px-8 mt-4 space-x-8">
                             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-48">
                                 <div class="flex justify-center text-center p-4 bg-blue-200 border-b border-gray-200">
-                                    <a href="{{route('cars.sort')}}">Sort cars from the most booked one!</a>
+                                    <a href="{{route('cars.sortDesc')}}">Sort cars from the most booked one!</a>
+                                </div>
+                            </div>
+                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-48">
+                                <div class="flex justify-center text-center p-4 bg-blue-200 border-b border-gray-200">
+                                    <a href="{{route('cars.sort')}}">Sort cars from the least booked one!</a>
                                 </div>
                             </div>
                         </div>
@@ -98,29 +103,56 @@
                         @if(!empty($notAllowed))
                             <div class="flex justify-center mt-4"> {{ $notAllowed }}</div>
                         @else
-                        <h1 class="flex justify-center underline mt-8">Booked Cars</h1>
-                        <div class="flex justify-center mt-2">
-                            <table class="border-collapse border-2 border-slate-300 text-xl mt-2 mb-4">
-                                <thead>
-                                <tr>
-                                    <th class="border border-slate-300 px-4">Id</th>
-                                    <th class="border border-slate-300 px-4">Car Id</th>
-                                    <th class="border border-slate-300 px-4">Start Day</th>
-                                    <th class="border border-slate-300 px-4">Return Day</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($bookings as $booking)
+                            <h1 class="flex justify-center underline mt-8">Booked Cars</h1>
+                            <div class="flex justify-center mt-2">
+                                <table class="border-collapse border-2 border-slate-300 text-xl mt-2 mb-4">
+                                    <thead>
                                     <tr>
-                                        <td class="border border-slate-300">{{$booking->id}}</td>
-                                        <td class="border border-slate-300">{{$booking->car_id}}</td>
-                                        <td class="border border-slate-300">{{$booking->start_time }}</td>
-                                        <td class="border border-slate-300">{{$booking->return_time }}</td>
+                                        <th class="border border-slate-300 px-4">Id</th>
+                                        <th class="border border-slate-300 px-4">Car Id</th>
+                                        <th class="border border-slate-300 px-4">Start Day</th>
+                                        <th class="border border-slate-300 px-4">Return Day</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($bookings as $booking)
+                                        <tr>
+                                            <td class="border border-slate-300">{{$booking->id}}</td>
+                                            <td class="border border-slate-300">{{$booking->car_id}}</td>
+                                            <td class="border border-slate-300">{{$booking->start_time }}</td>
+                                            <td class="border border-slate-300">{{$booking->return_time }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex justify-center mt-2 flex-col">
+                                <h1>Your favourite car/s!</h1>
+                                <table class="border-collapse border-2 border-slate-300 text-xl mt-4">
+                                    <thead>
+                                    <tr>
+                                        <th class="border border-slate-300 px-4">Id</th>
+                                        <th class="border border-slate-300 px-4">Car Brand</th>
+                                        <th class="border border-slate-300 px-4">Car Model</th>
+                                        <th class="border border-slate-300 px-4">Car Engine</th>
+                                        <th class="border border-slate-300 px-4">Car Color</th>
+                                        <th class="border border-slate-300 px-4">Car Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($fav as $car)
+                                        <tr>
+                                            <td class="border border-slate-300">{{$car->id}}</td>
+                                            <td class="border border-slate-300">{{$car->brand }}</td>
+                                            <td class="border border-slate-300">{{$car->model }}</td>
+                                            <td class="border border-slate-300">{{$car->engine }}</td>
+                                            <td class="border border-slate-300">{{$car->color }}</td>
+                                            <td class="border border-slate-300">{{$car->price }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         @endif
                     </div>
                     @endrole
