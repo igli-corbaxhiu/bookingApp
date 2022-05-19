@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($sorted as $car)
+        @foreach ($sort as $car)
             <tr>
                 <td class="border border-slate-300">{{$car->id}}</td>
                 <td class="border border-slate-300">{{$car->brand }}</td>

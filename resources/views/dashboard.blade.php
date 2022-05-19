@@ -87,17 +87,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mx-auto justify-center flex lg:px-8 mt-4 space-x-8">
-                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-48">
-                                <div class="flex justify-center text-center p-4 bg-blue-200 border-b border-gray-200">
-                                    <a href="{{route('cars.sortDesc')}}">Sort cars from the most booked one!</a>
-                                </div>
-                            </div>
-                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-48">
-                                <div class="flex justify-center text-center p-4 bg-blue-200 border-b border-gray-200">
-                                    <a href="{{route('cars.sort')}}">Sort cars from the least booked one!</a>
-                                </div>
-                            </div>
+                        <div class="mx-auto justify-center flex flex-col lg:px-8 mt-4 space-x-8">
+
+                            <h1 class="mb-2">Sort cars in ascending ore descending order!</h1>
+                            <form action="{{ route('cars.sort')}}" method="post">
+                                @csrf
+                                <select name="sorting">
+                                    <option value="ascending">Ascending</option>
+                                    <option value="descending">Descending</option>
+                                </select>
+                                <button value="submit" type="submit">Submit</button>
+                            </form>
                         </div>
 
                         @if(!empty($notAllowed))

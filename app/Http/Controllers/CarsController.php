@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Car;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 class CarsController extends Controller
 {
@@ -20,20 +23,24 @@ class CarsController extends Controller
         //
     }
 
-    public function sortDesc() {
+//    public function sortDesc() {
+//
+//        $cars = Car::all();
+//        $sorted = $cars->sortByDesc('timeBooked');
+//        return view('cars', compact('sorted'));
+//    }
+
+    public function sort(Request $request) {
 
         $cars = Car::all();
-        $sorted = $cars->sortByDesc('timeBooked');
-        return view('cars', compact('sorted'));
+
+        $sort = match ($request->input('sorting')) {
+            'ascending' => $cars->sortBy('timeBooked'),
+            'descending' => $cars->sortByDesc('timeBooked'),
+        };
+
+        return view('cars', compact('sort'));
     }
-
-    public function sort() {
-
-        $cars = Car::all();
-        $sorted = $cars->sortBy('timeBooked');
-        return view('cars', compact('sorted'));
-    }
-
 
     /**
      * Show the form for creating a new resource.

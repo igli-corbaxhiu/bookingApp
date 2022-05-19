@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CarsController;
-use App\Models\Booking;
-use App\Models\Car;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,30 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-
-    $cars = Car::all();
-    $userId = Auth::user()->id;
-    $bookings = Booking::all()->where('user_id', '=', $userId);
-    $timeBooked = array();
-    $bookingCars = array();
-
-    foreach ($bookings as $booking){
-
-        $bookingCars[] = $booking['car_id'];
-    }
-    $favouriteCar = Car::find($bookingCars);
-
-    foreach ($favouriteCar as $car){
-
-        $timeBooked[] = $car['timeBooked'];
-    }
-    $max = max($timeBooked);
-
-    $fav = $favouriteCar->where('timeBooked', $max);
-
-    return view('dashboard', compact('cars', 'bookings', 'fav'));
-})->middleware(['auth'])->name('dashboard');
+Route::any('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth']);
 
 Route::resource('cars', CarsController::class)->middleware('role:admin');
 Route::resource('bookings', BookingsController::class)->middleware('role:user');
