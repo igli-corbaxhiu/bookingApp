@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\Car;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Input\Input;
 
 class CarsController extends Controller
 {

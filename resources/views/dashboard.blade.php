@@ -89,7 +89,7 @@
                         </div>
                         <div class="mx-auto justify-center flex flex-col lg:px-8 mt-4 space-x-8">
 
-                            <h1 class="mb-2">Sort cars in ascending ore descending order!</h1>
+                            <h1 class="mb-2">Sort cars in ascending or descending order!</h1>
                             <form action="{{ route('cars.sort')}}" method="post">
                                 @csrf
                                 <select name="sorting">

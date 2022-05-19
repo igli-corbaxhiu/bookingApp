@@ -9,29 +9,29 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index() {
+
         $cars = Car::all();
         $userId = Auth::user()->id;
         $bookings = Booking::all()->where('user_id', '=', $userId);
-        $timeBooked = array();
-        $bookingCars = array();
+        $bookingsArray = $bookings->toArray();
+        $ids = array();
 
-        foreach ($bookings as $booking){
+        foreach ($bookingsArray as $booking){
 
-            $bookingCars[] = $booking['car_id'];
+            $ids[] = $booking['car_id'];
         }
-        $favouriteCar = Car::find($bookingCars);
+        $arr_freq = array_count_values($ids);
+        arsort($arr_freq);
+        $ids = array_keys($arr_freq);
 
-        foreach ($favouriteCar as $car){
-
-            $timeBooked[] = $car['timeBooked'];
-        }
-        if(!empty($timeBooked)) {
-            $max = max($timeBooked);
-            $fav = $favouriteCar->where('timeBooked', $max);
-            return view('dashboard', compact('cars', 'bookings', 'fav'));
+        if(!empty($ids)) {
+            $carId = $ids[0];
+            $fav = Car::all()->where('id', $carId);
         }
         else {
-            return view('dashboard', compact('cars', 'bookings'));
+            $fav = array();
         }
+        return view('dashboard', compact('cars', 'bookings', 'fav'));
+
     }
 }
