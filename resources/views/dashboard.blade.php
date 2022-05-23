@@ -53,74 +53,78 @@
 
                 </div>
                 @else
-                    <div class="flex flex-col justify-center max-w-6xl mx-auto sm:px-4 lg:px-6">
-                        <div class="flex flex-row">
-                            <div class="flex justify-center">
-                                <table class="border-collapse border-2 border-slate-300 text-lg mt-4">
-                                    <thead>
-                                    <tr>
-                                        <th class="border border-slate-300 text-center px-4">Id</th>
-                                        <th class="border border-slate-300 text-center px-4">Car Brand</th>
-                                        <th class="border border-slate-300 text-center px-4">Car Model</th>
-                                        <th class="border border-slate-300 text-center px-4">Car Engine</th>
-                                        <th class="border border-slate-300 text-center px-4">Car Color</th>
-                                        <th class="border border-slate-300 text-center px-4">Car Price</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($cars as $car)
-                                        <tr>
-                                            <td class="border border-slate-300 text-center">{{$car->id}}</td>
-                                            <td class="border border-slate-300 text-center">{{$car->brand }}</td>
-                                            <td class="border border-slate-300 text-center">{{$car->model }}</td>
-                                            <td class="border border-slate-300 text-center">{{$car->engine }}</td>
-                                            <td class="border border-slate-300 text-center">{{$car->color }}</td>
-                                            <td class="border border-slate-300 text-center">{{$car->price }}$</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="flex flex-col">
-                                <div class="mx-auto justify-center flex lg:px-8 mt-4">
-                                    <div class="bg-white overflow-hidden shadow-sm rounded w-48">
-                                        <div class="flex justify-center p-4 bg-blue-200 border-b border-gray-200">
-                                            <a href="{{route('bookings.create')}}">Book a car</a>
-                                        </div>
+                <div class="flex md:flex-row flex-col justify-center max-w-6xl mx-auto sm:px-4 lg:px-6">
+                    <div class="flex justify-center">
+{{--                        <table class="border-collapse border-2 border-slate-300 text-lg mt-4">--}}
+{{--                            <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Id</th>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Car Brand</th>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Car Model</th>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Car Engine</th>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Car Color</th>--}}
+{{--                                    <th class="border border-slate-300 text-center px-4">Car Price</th>--}}
+{{--                                </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+                        <div class="flex flex-col sm:flex-wrap sm:flex-row mt-4 mx-4">
+                            @foreach ($cars as $car)
+                            <div class="flex flex-col sm:flex-wrap sm:pl-1.5 pt-2 sm:pt-0 max-w-xl">
+                                <div class="flex">
+                                    <img src="#" alt="volkswagen">
+                                </div>
+                                <div class="py-1 flex">
+                                    <div class="text-sm flex flex-row sm:flex-col">
+                                        <div class="flex">{{ $car->brand }}</div>
+                                        <div class="flex">{{ $car->model }}</div>
+
                                     </div>
                                 </div>
-                                <div class="mx-auto justify-center flex flex-col lg:px-8 mt-4 space-x-8">
-
-                                    <h1 class="mb-2">Sort cars in ascending or descending order!</h1>
-                                    <form action="{{ route('cars.sort')}}" method="post">
-                                        @csrf
-                                        <select name="sorting">
-                                            <option value="ascending">Ascending</option>
-                                            <option value="descending">Descending</option>
-                                        </select>
-                                        <button value="submit" type="submit">Submit</button>
-                                    </form>
+                            </div>
+                            @endforeach
+                        </div>
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="mx-auto justify-center flex lg:px-8 mt-4">
+                            <div class="bg-white overflow-hidden shadow-sm rounded w-48">
+                                <div class="flex justify-center p-4 bg-blue-200 border-b border-gray-200">
+                                    <a href="{{route('bookings.create')}}">Book a car</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mx-auto justify-center flex flex-col lg:px-8 mt-4 space-x-8">
+                            <h1 class="mb-2 text-center flex">Sort cars in ascending or descending order!</h1>
+                            <form action="{{ route('cars.sort')}}" method="post">
+                                @csrf
+                                <select name="sorting">
+                                    <option value="ascending">Ascending</option>
+                                    <option value="descending">Descending</option>
+                                </select>
+                                <button value="submit" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                     @if(!empty($notAllowed))
                         <div class="flex justify-center mt-4"> {{ $notAllowed }}</div>
                     @else
-                        <div class="flex flex-col md:flex-row space-x-6 mt-4">
-                            <div class="flex flex-col">
-                                <h1 class="flex justify-center">Booked Cars</h1>
-                                <div class="flex justify-center mt-2">
-                                    <table class="border-collapse border-2 border-slate-300 text-lg mt-2 mb-4">
-                                        <thead>
-                                        <tr>
-                                            <th class="border text-center border-slate-300 px-4">Id</th>
-                                            <th class="border text-center border-slate-300 px-4">Car Id</th>
-                                            <th class="border text-center border-slate-300 px-4">Start Day</th>
-                                            <th class="border text-center border-slate-300 px-4">Return Day</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($bookings as $booking)
+                    <div class="flex flex-col md:flex-row space-x-6 mt-4 mx-auto sm:px-4 lg:px-6">
+                        <div class="flex flex-col">
+                            <h1 class="flex justify-center">Booked Cars</h1>
+                            <div class="flex justify-center mt-2">
+                                <table class="border-collapse border-2 border-slate-300 text-lg mt-2 mb-4">
+                                    <thead>
+                                    <tr>
+                                        <th class="border text-center border-slate-300 px-4">Id</th>
+                                        <th class="border text-center border-slate-300 px-4">Car Id</th>
+                                        <th class="border text-center border-slate-300 px-4">Start Day</th>
+                                        <th class="border text-center border-slate-300 px-4">Return Day</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($bookings as $booking)
                                             <tr>
                                                 <td class="border text-center border-slate-300">{{$booking->id}}</td>
                                                 <td class="border text-center border-slate-300">{{$booking->car_id}}</td>
