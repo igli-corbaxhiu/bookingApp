@@ -106,7 +106,7 @@
                     @if(!empty($notAllowed))
                         <div class="flex justify-center mt-4"> {{ $notAllowed }}</div>
                     @else
-                        <div class="flex flex-row space-x-6 mt-4">
+                        <div class="flex flex-col md:flex-row space-x-6 mt-4">
                             <div class="flex flex-col">
                                 <h1 class="flex justify-center">Booked Cars</h1>
                                 <div class="flex justify-center mt-2">
