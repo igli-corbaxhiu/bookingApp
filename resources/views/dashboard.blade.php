@@ -67,17 +67,17 @@
 {{--                                </tr>--}}
 {{--                            </thead>--}}
 {{--                            <tbody>--}}
-                        <div class="flex flex-col sm:flex-wrap sm:flex-row mt-4 mx-4 border-gray-500">
+                        <div class="flex flex-col sm:flex-wrap sm:flex-row mt-4 mx-4">
                             @foreach ($cars as $car)
-                            <div class="flex flex-col sm:flex-wrap sm:pl-1.5 pt-2 sm:pt-0 max-w-xl">
+                            <div class="flex flex-col sm:flex-wrap p-4 sm:pt-0 max-w-xl">
                                 <div class="flex">
                                     <img src="{{ url('/images/volkswagen_golf_gte_2021_5k-HD.png') }}" class="w-full sm:w-28" alt="volkswagen">
                                 </div>
                                 <div class="py-1 flex">
                                     <div class="text-sm flex flex-row sm:flex-col">
-                                        <div class="flex flex-row">
+                                        <div class="flex flex-row space-x-2">
                                             <div class="flex">{{ $car->brand }}</div>
-                                            <div class="flex"> {{ $car->model }}</div>
+                                            <div class="flex">{{ $car->model }}</div>
                                         </div>
                                         <div class="flex">
                                             <div class="flex">{{ $car->price }}$</div>
