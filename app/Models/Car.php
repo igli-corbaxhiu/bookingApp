@@ -11,7 +11,7 @@ class Car extends Model
 
     protected $table = "cars";
 
-    protected $fillable = ['brand', 'model', 'engine', 'status', 'color', 'price'];
+    protected $fillable = ['brand', 'model', 'engine', 'status', 'color', 'price', 'timeBooked'];
 
     public function users() {
 

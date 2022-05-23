@@ -128,7 +128,7 @@
                             </div>
                             <div class="flex justify-center mt-2 flex-col">
                                 <h1>Your favourite car/s!</h1>
-                                <table class="border-collapse border-2 border-slate-300 text-xl mt-4">
+                                <table class="border-collapse border-2 border-slate-300 text-xl mt-4 mb-4">
                                     <thead>
                                     <tr>
                                         <th class="border border-slate-300 px-4">Id</th>
@@ -147,7 +147,7 @@
                                             <td class="border border-slate-300">{{$car->model }}</td>
                                             <td class="border border-slate-300">{{$car->engine }}</td>
                                             <td class="border border-slate-300">{{$car->color }}</td>
-                                            <td class="border border-slate-300">{{$car->price }}</td>
+                                            <td class="border border-slate-300">{{$car->price }}$</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

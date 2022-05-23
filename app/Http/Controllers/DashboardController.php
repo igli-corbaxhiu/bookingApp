@@ -12,7 +12,7 @@ class DashboardController extends Controller
 
         $cars = Car::all();
         $userId = Auth::user()->id;
-        $bookings = Booking::all()->where('user_id', '=', $userId);
+        $bookings = Booking::all()->where('user_id', $userId);
         $bookingsArray = $bookings->toArray();
         $ids = array();
 
@@ -22,10 +22,10 @@ class DashboardController extends Controller
         }
         $arr_freq = array_count_values($ids);
         arsort($arr_freq);
-        $ids = array_keys($arr_freq);
+        $keys = array_keys($arr_freq);
 
         if(!empty($ids)) {
-            $carId = $ids[0];
+            $carId = $keys[0];
             $fav = Car::all()->where('id', $carId);
         }
         else {
