@@ -67,17 +67,21 @@
 {{--                                </tr>--}}
 {{--                            </thead>--}}
 {{--                            <tbody>--}}
-                        <div class="flex flex-col sm:flex-wrap sm:flex-row mt-4 mx-4">
+                        <div class="flex flex-col sm:flex-wrap sm:flex-row mt-4 mx-4 border-gray-500">
                             @foreach ($cars as $car)
                             <div class="flex flex-col sm:flex-wrap sm:pl-1.5 pt-2 sm:pt-0 max-w-xl">
                                 <div class="flex">
-                                    <img src="#" alt="volkswagen">
+                                    <img src="{{ url('/images/volkswagen_golf_gte_2021_5k-HD.png') }}" class="w-full sm:w-28" alt="volkswagen">
                                 </div>
                                 <div class="py-1 flex">
                                     <div class="text-sm flex flex-row sm:flex-col">
-                                        <div class="flex">{{ $car->brand }}</div>
-                                        <div class="flex">{{ $car->model }}</div>
-
+                                        <div class="flex flex-row">
+                                            <div class="flex">{{ $car->brand }}</div>
+                                            <div class="flex"> {{ $car->model }}</div>
+                                        </div>
+                                        <div class="flex">
+                                            <div class="flex">{{ $car->price }}$</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +106,7 @@
                                     <option value="ascending">Ascending</option>
                                     <option value="descending">Descending</option>
                                 </select>
-                                <button value="submit" type="submit">Submit</button>
+                                <button value="submit" type="submit" class="border border-gray-200 bg-blue-200 px-4 py-2 mt-2 rounded">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -137,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-col">
-                                <h1 class="flex justify-center">Your favourite car/s!</h1>
+                                <h1 class="flex justify-center">Your favourite car!</h1>
                                 <div class="flex justify-center mt-2">
                                     <table class="border-collapse border-2 border-slate-300 text-lg mt-2 mb-4">
                                         <thead>
